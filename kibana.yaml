@@ -2,8 +2,9 @@ apiVersion: kibana.k8s.elastic.co/v1
 kind: Kibana
 metadata:
   name: kibana
+  namespace: elasticsearch
 spec:
-  version: 8.4.3
+  version: 7.6.2
   count: 1
   elasticsearchRef:
     name: elasticsearch
@@ -15,7 +16,7 @@ spec:
   podTemplate:
     spec:
       nodeSelector:
-        kubernetes.io/hostname: worker01
+        kubernetes.io/hostname: worker02   # Specify the worker node
       containers:
       - name: kibana
         env:
@@ -24,6 +25,6 @@ spec:
         resources:
           requests:
             memory: "1Gi"
-            cpu: "0.5"
+            cpu: "500m"
           limits:
             memory: "1Gi"

@@ -3,6 +3,7 @@ kind: Kustomization
 
 namespace: elasticsearch
 resources:
+- all-cdrs.yaml
 - storageclass-others.yaml
 - elasticsearch-cluster.yaml
 - kibana.yaml

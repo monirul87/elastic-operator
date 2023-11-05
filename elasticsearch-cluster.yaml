@@ -4,14 +4,14 @@ metadata:
   name: elasticsearch
   namespace: elasticsearch
 spec:
-  version: 8.4.3
+  version: 7.6.2
   http:
     tls:
       selfSignedCertificate:
         disabled: true
   nodeSets:
   - name: master
-    count: 1 #3
+    count: 3
     config:
       node.roles: ["master"]
     volumeClaimTemplates:
@@ -22,12 +22,12 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 10Gi
-        storageClassName: hostpath-sc
+            storage: 50Gi
+        storageClassName: ssd-sc  # Use the 'ssd-sc' StorageClass
     podTemplate:
       spec:
         nodeSelector:
-          node-role: master
+          kubernetes.io/hostname: worker02
         initContainers:
         - name: sysctl
           securityContext:
@@ -38,15 +38,15 @@ spec:
         - name: elasticsearch
           resources:
             requests:
-              memory: "2Gi"  #4
-              cpu: "1" #2
+              memory: "4Gi"
+              cpu: 2
             limits:
-              memory: "2Gi" #4
+              memory: "4Gi"
           env:
           - name: "ES_JAVA_OPTS"
             value: "-Xms2g -Xmx2g"
   - name: data
-    count: 1 #2
+    count: 2
     config:
       node.roles: ["data", "ingest"]
     volumeClaimTemplates:
@@ -57,12 +57,12 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 20Gi
-        storageClassName: hostpath-sc
+            storage: 100Gi
+        storageClassName: ssd-sc  # Use the 'ssd-sc' StorageClass
     podTemplate:
       spec:
         nodeSelector:
-          node-role: data
+          kubernetes.io/hostname: worker02
         initContainers:
         - name: sysctl
           securityContext:
@@ -73,10 +73,10 @@ spec:
         - name: elasticsearch
           resources:
             requests:
-              memory: "1Gi" #4
-              cpu: "1"
+              memory: "4Gi"
+              cpu: 1
             limits:
-              memory: "1Gi" #4
+              memory: "4Gi"
           env:
           - name: "ES_JAVA_OPTS"
             value: "-Xms2g -Xmx2g"
