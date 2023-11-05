@@ -23,40 +23,28 @@ spec:
         resources:
           requests:
             storage: 100Gi
-        storageClassName: ssd-sc
+        storageClassName: hostpath-sc
     podTemplate:
       spec:
+        nodeSelector:
+          node-role: master
         initContainers:
         - name: sysctl
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']      
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
         containers:
         - name: elasticsearch
           resources:
             requests:
-              memory: 4Gi
-              cpu: 2
+              memory: "4Gi"
+              cpu: "2"
             limits:
-              memory: 4Gi
+              memory: "4Gi"
           env:
-          - name: JAVA_OPTS
-            value: -Xms2g -Xmx2g
-        # affinity:
-        #   nodeAffinity:
-        #     requiredDuringSchedulingIgnoredDuringExecution:
-        #       nodeSelectorTerms:
-        #         - matchExpressions:
-        #             - key: "dedicated"
-        #               operator: In
-        #               values:
-        #                 - "elasticsearch"
-        # tolerations:
-        #   - key: "dedicated"
-        #     operator: "Equal"
-        #     value: "elasticsearch"
-        #     effect: "NoSchedule"
+          - name: "ES_JAVA_OPTS"
+            value: "-Xms2g -Xmx2g"
   - name: data
     count: 2
     config:
@@ -70,37 +58,25 @@ spec:
         resources:
           requests:
             storage: 100Gi
-        storageClassName: ssd-sc
+        storageClassName: hostpath-sc
     podTemplate:
       spec:
+        nodeSelector:
+          node-role: data
         initContainers:
         - name: sysctl
           securityContext:
             privileged: true
             runAsUser: 0
-          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']       
+          command: ["sysctl", "-w", "vm.max_map_count=262144"]
         containers:
         - name: elasticsearch
           resources:
             requests:
-              memory: 4Gi
-              cpu: 1
+              memory: "4Gi"
+              cpu: "1"
             limits:
-              memory: 4Gi
+              memory: "4Gi"
           env:
-          - name: JAVA_OPTS
-            value: -Xms2g -Xmx2g
-        # affinity:
-        #   nodeAffinity:
-        #     requiredDuringSchedulingIgnoredDuringExecution:
-        #       nodeSelectorTerms:
-        #         - matchExpressions:
-        #             - key: "dedicated"
-        #               operator: In
-        #               values:
-        #                 - "elasticsearch"
-        # tolerations:
-        #   - key: "dedicated"
-        #     operator: "Equal"
-        #     value: "elasticsearch"
-        #     effect: "NoSchedule"
+          - name: "ES_JAVA_OPTS"
+            value: "-Xms2g -Xmx2g"

@@ -7,6 +7,8 @@ resources:
     memory: 1000Mi
 podMonitor:
   enabled: true
+nodeSelector:
+        kubernetes.io/hostname: worker02
 # affinity:
 #   nodeAffinity:
 #     requiredDuringSchedulingIgnoredDuringExecution:

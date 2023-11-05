@@ -1,0 +1,42 @@
+# apiVersion: storage.k8s.io/v1
+# kind: StorageClass
+# metadata:
+#   name: ssd-sc
+# provisioner: kubernetes.io/gce-pd
+# volumeBindingMode: WaitForFirstConsumer
+# allowVolumeExpansion: true
+# parameters:
+#   type: pd-ssd
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: hostpath-sc
+provisioner: k8s.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: elasticsearch-pv
+spec:
+  capacity:
+    storage: 20Gi  # Adjust the storage capacity as needed
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: hostpath-sc  # Reference the StorageClass if created
+  hostPath:
+    path: /path/on/host/machine  # Replace with your actual host path
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: elasticsearch-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: hostpath-sc  # Reference the StorageClass if created
+  resources:
+    requests:
+      storage: 200Gi  # Match the storage capacity with the PV

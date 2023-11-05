@@ -11,31 +11,19 @@ spec:
   http:
     tls:
       selfSignedCertificate:
-        disabled: true  
+        disabled: true
   podTemplate:
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: worker02
       containers:
       - name: kibana
         env:
-          - name: NODE_OPTIONS
-            value: "--max-old-space-size=2048"
+        - name: NODE_OPTIONS
+          value: "--max-old-space-size=2048"
         resources:
           requests:
-            memory: 1Gi
-            cpu: 0.5
+            memory: "1Gi"
+            cpu: "0.5"
           limits:
-            memory: 1Gi
-      # affinity:
-      #   nodeAffinity:
-      #     requiredDuringSchedulingIgnoredDuringExecution:
-      #       nodeSelectorTerms:
-      #         - matchExpressions:
-      #             - key: "dedicated"
-      #               operator: In
-      #               values:
-      #                 - "elasticsearch"
-      # tolerations:
-      #   - key: "dedicated"
-      #     operator: "Equal"
-      #     value: "elasticsearch"
-      #     effect: "NoSchedule"
+            memory: "1Gi"
