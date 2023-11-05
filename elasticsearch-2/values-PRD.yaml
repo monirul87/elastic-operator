@@ -413,21 +413,23 @@ data:
   ## Affinity for pod assignment.
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ##
-  # affinity: {}
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: "dedicated"
-                operator: In
-                values:
-                  - "elasticsearch"
-  tolerations:
-    - key: "dedicated"
-      operator: "Equal"
-      value: "elasticsearch"
-      effect: "NoSchedule"
+  affinity: {}
+  nodeSelector:
+    kubernetes.io/hostname: worker02
+  # affinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #         - matchExpressions:
+  #             - key: "dedicated"
+  #               operator: In
+  #               values:
+  #                 - "elasticsearch"
+  # tolerations:
+  #   - key: "dedicated"
+  #     operator: "Equal"
+  #     value: "elasticsearch"
+  #     effect: "NoSchedule"
   ## Node labels for pod assignment. Evaluated as a template.
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
@@ -523,21 +525,23 @@ ingest:
   ## Affinity for pod assignment.
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
   ##
-  # affinity: {}
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: "dedicated"
-                operator: In
-                values:
-                  - "elasticsearch"
-  tolerations:
-    - key: "dedicated"
-      operator: "Equal"
-      value: "elasticsearch"
-      effect: "NoSchedule"
+  affinity: {}
+  nodeSelector:
+    kubernetes.io/hostname: worker02
+  # affinity:
+  #   nodeAffinity:
+  #     requiredDuringSchedulingIgnoredDuringExecution:
+  #       nodeSelectorTerms:
+  #         - matchExpressions:
+  #             - key: "dedicated"
+  #               operator: In
+  #               values:
+  #                 - "elasticsearch"
+  # tolerations:
+  #   - key: "dedicated"
+  #     operator: "Equal"
+  #     value: "elasticsearch"
+  #     effect: "NoSchedule"
   ## Node labels for pod assignment. Evaluated as a template.
   ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
