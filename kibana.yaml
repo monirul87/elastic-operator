@@ -15,7 +15,7 @@ spec:
   podTemplate:
     spec:
       nodeSelector:
-        kubernetes.io/hostname: worker02
+        kubernetes.io/hostname: worker01
       containers:
       - name: kibana
         env:

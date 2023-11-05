@@ -11,7 +11,7 @@ spec:
         disabled: true
   nodeSets:
   - name: master
-    count: 3
+    count: 1 #3
     config:
       node.roles: ["master"]
     volumeClaimTemplates:
@@ -22,7 +22,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 100Gi
+            storage: 10Gi
         storageClassName: hostpath-sc
     podTemplate:
       spec:
@@ -38,15 +38,15 @@ spec:
         - name: elasticsearch
           resources:
             requests:
-              memory: "4Gi"
-              cpu: "2"
+              memory: "2Gi"  #4
+              cpu: "1" #2
             limits:
-              memory: "4Gi"
+              memory: "2Gi" #4
           env:
           - name: "ES_JAVA_OPTS"
             value: "-Xms2g -Xmx2g"
   - name: data
-    count: 2
+    count: 1 #2
     config:
       node.roles: ["data", "ingest"]
     volumeClaimTemplates:
@@ -57,7 +57,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 100Gi
+            storage: 20Gi
         storageClassName: hostpath-sc
     podTemplate:
       spec:
@@ -73,10 +73,10 @@ spec:
         - name: elasticsearch
           resources:
             requests:
-              memory: "4Gi"
+              memory: "1Gi" #4
               cpu: "1"
             limits:
-              memory: "4Gi"
+              memory: "1Gi" #4
           env:
           - name: "ES_JAVA_OPTS"
             value: "-Xms2g -Xmx2g"
