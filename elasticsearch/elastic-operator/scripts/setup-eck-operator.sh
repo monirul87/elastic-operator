@@ -20,9 +20,9 @@ helm upgrade \
     --namespace elastic-system \
     --create-namespace \
     --version v2.4.0 \
-    -f elastic-operator/values.yaml
+    -f values.yaml
 
 
 # export ENV=prd
 # ./scripts/setup-eck-operator.sh
-# kubectl apply -k elastic-operator/overlay/$ENV
+# kubectl apply -k overlay/$ENV
