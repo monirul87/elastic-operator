@@ -1,0 +1,12 @@
+- op: replace
+  path: /spec/nodeSets/0/volumeClaimTemplates/0/spec/resources/requests/storage
+  value: 10Gi
+- op: replace
+  path: /spec/nodeSets/1/volumeClaimTemplates/0/spec/resources/requests/storage
+  value: 200Gi
+- op: replace
+  path: /spec/nodeSets/0/podTemplate/spec/containers/0/env/0/value
+  value: -Xms3g -Xmx3g
+- op: replace
+  path: /spec/nodeSets/1/podTemplate/spec/containers/0/env/0/value
+  value: -Xms3g -Xmx3g

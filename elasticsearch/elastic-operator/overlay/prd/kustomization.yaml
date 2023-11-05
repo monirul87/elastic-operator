@@ -1,0 +1,10 @@
+resources:
+  - ../../base
+
+patchesJson6902:
+- target:
+    group: elasticsearch.k8s.elastic.co
+    version: v1
+    kind: Elasticsearch
+    name: ride
+  path: elasticsearch-cluster-patch.yaml
