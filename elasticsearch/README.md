@@ -8,7 +8,7 @@ cd elastic-operator/elasticsearch/
 ```
 ## Add repo
 ```
-helm repo add bitnami/elasticsearch
+helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
 ## Create elasticsearch namespace
@@ -17,14 +17,23 @@ kubectl create ns elasticsearch
 ```
 ## Data Direcotory Creation & Permission (worker02)
 ```
+mkdir /mnt/es-coordinating-0
+mkdir /mnt/es-coordinating-1
+mkdir /mnt/es-data-0/
+mkdir /mnt/es-data-1/
+mkdir /mnt/es-ingest-0
+mkdir /mnt/es-ingest-1
 mkdir /mnt/es-master-0
 mkdir /mnt/es-master-1
-mkdir /mnt/es-data-slave-0/
-mkdir /mnt/es-data-slave-1/
+
+chown -R 1001:1001 /mnt/es-coordinating-0
+chown -R 1001:1001 /mnt/es-coordinating-1/
+chown -R 1001:1001 /mnt/es-data-0/
+chown -R 1001:1001 /mnt/es-data-1/
+chown -R 1001:1001 /mnt/es-ingest-0/
+chown -R 1001:1001 /mnt/es-ingest-1/
 chown -R 1001:1001 /mnt/es-master-0
 chown -R 1001:1001 /mnt/es-master-1/
-chown -R 1001:1001 /mnt/es-data-slave-0/
-chown -R 1001:1001 /mnt/es-data-slave-1/
 ```
 ## PV Creation
 ```
@@ -41,7 +50,7 @@ helm upgrade \
     elasticsearch bitnami/elasticsearch \
     --namespace elasticsearch \
     --create-namespace \
-    # --version v18.2.0 \
+    --version v19.13.5 \
     -f values-prd.yaml
 ```
 
@@ -1059,3 +1068,46 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+```
+helm pull bitnami/elasticsearch --untar --untardir temp2
+
+```
+
+```
+helm install elasticsearch -f values-prd.yaml bitnami/elasticsearch -n elasticsearch
+NAME: elasticsearch
+LAST DEPLOYED: Mon Nov  6 16:54:57 2023
+NAMESPACE: elasticsearch
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: elasticsearch
+CHART VERSION: 19.13.5
+APP VERSION: 8.10.4
+
+-------------------------------------------------------------------------------
+ WARNING
+
+    Elasticsearch requires some changes in the kernel of the host machine to
+    work as expected. If those values are not set in the underlying operating
+    system, the ES containers fail to boot with ERROR messages.
+
+    More information about these requirements can be found in the links below:
+
+      https://www.elastic.co/guide/en/elasticsearch/reference/current/file-descriptors.html
+      https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
+
+    This chart uses a privileged initContainer to change those settings in the Kernel
+    by running: sysctl -w vm.max_map_count=262144 && sysctl -w fs.file-max=65536
+
+** Please be patient while the chart is being deployed **
+
+  Elasticsearch can be accessed within the cluster on port 9200 at elasticsearch.elasticsearch.svc.cluster.local
+
+  To access from outside the cluster execute the following commands:
+
+    kubectl port-forward --namespace elasticsearch svc/elasticsearch 9200:9200 &
+    curl http://127.0.0.1:9200/
+    ```
