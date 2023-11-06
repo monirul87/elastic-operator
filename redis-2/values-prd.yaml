@@ -38,7 +38,7 @@ image:
 ## Cluster settings
 cluster:
   enabled: true
-  slaveCount: 1
+  slaveCount: 3
 
 ## Use redis sentinel in the redis pod. This will disable the master and slave services and
 ## create one redis service with ports to the sentinel and the redis instances
@@ -210,14 +210,15 @@ redisPort: 6379
 ##
 ## Redis Master parameters
 ##
-
 master:
-  ## Redis command arguments
-  ##
-  ## Can be used to specify command line arguments, for example:
-  ##
-  command: 
+  command:
     - "/run.sh"
+# master:
+#   ## Redis command arguments
+#   ##
+#   ## Can be used to specify command line arguments, for example:
+#   ##
+#   command: "/run.sh"
   ## Additional Redis configuration for the master nodes
   ## ref: https://redis.io/topics/config
   ##
@@ -308,7 +309,7 @@ master:
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##
   persistence:
-    enabled: false
+    enabled: true
     ## The path the volume will be mounted at, useful when using different
     ## Redis images.
     path: /data
@@ -435,7 +436,7 @@ slave:
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##
   persistence:
-    enabled: false
+    enabled: true
     ## The path the volume will be mounted at, useful when using different
     ## Redis images.
     path: /data
