@@ -19,15 +19,11 @@ image:
   ## ref: https://github.com/bitnami/bitnami-docker-redis#supported-tags-and-respective-dockerfile-links
   ##
   tag: 5.0.7-debian-10-r48
-  ## Specify a imagePullPolicy
-  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
-  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-  ##
+  ## Specify an imagePullPolicy
+  ## Defaults to 'IfNotPresent'
   pullPolicy: IfNotPresent
   ## Optionally specify an array of imagePullSecrets.
   ## Secrets must be manually created in the namespace.
-  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-  ##
   # pullSecrets:
   #   - myRegistryKeySecretName
 
@@ -51,7 +47,7 @@ sentinel:
   ## Require password authentication on the sentinel itself
   ## ref: https://redis.io/topics/sentinel
   usePassword: false
-  ## Bitnami Redis Sentintel image version
+  ## Bitnami Redis Sentinel image version
   ## ref: https://hub.docker.com/r/bitnami/redis-sentinel/tags/
   ##
   image:
@@ -61,15 +57,11 @@ sentinel:
     ## ref: https://github.com/bitnami/bitnami-docker-redis-sentinel#supported-tags-and-respective-dockerfile-links
     ##
     tag: 5.0.7-debian-10-r40
-    ## Specify a imagePullPolicy
-    ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
-    ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
-    ##
+    ## Specify an imagePullPolicy
+    ## Defaults to 'IfNotPresent'
     pullPolicy: IfNotPresent
     ## Optionally specify an array of imagePullSecrets.
     ## Secrets must be manually created in the namespace.
-    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
-    ##
     # pullSecrets:
     #   - myRegistryKeySecretName
   masterSet: mymaster
@@ -83,9 +75,9 @@ sentinel:
   ## ref: https://redis.io/topics/config
   ##
   configmap:
-  ## Enable or disable static sentinel IDs for each replicas
-  ## If disabled each sentinel will generate a random id at startup
-  ## If enabled, each replicas will have a constant ID on each start-up
+  ## Enable or disable static sentinel IDs for each replica
+  ## If disabled, each sentinel will generate a random ID at startup
+  ## If enabled, each replica will have a constant ID on each startup
   ##
   staticID: false
   ## Configure extra options for Redis Sentinel liveness and readiness probes
@@ -117,15 +109,12 @@ sentinel:
     type: ClusterIP
     sentinelPort: 26379
     redisPort: 6379
-
     ## Specify the nodePort value for the LoadBalancer and NodePort service types.
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ##
     # sentinelNodePort:
     # redisNodePort:
-
-    ## Provide any additional annotations which may be required. This can be used to
-    ## set the LoadBalancer service type to internal only.
+    ## Provide any additional annotations that may be required. This can be used to set the LoadBalancer service type to internal only.
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
     ##
     annotations: {}
@@ -148,7 +137,7 @@ networkPolicy:
   ##
   # allowExternal: true
 
-  ## Allow connections from other namespacess. Just set label for namespace and set label for pods (optional).
+  ## Allow connections from other namespaces. Just set a label for the namespace and set a label for pods (optional).
   ##
   ingressNSMatchLabels: {}
   ingressNSPodMatchLabels: {}
@@ -199,9 +188,9 @@ usePassword: false
 ## ref: https://github.com/bitnami/bitnami-docker-redis#setting-the-server-password-on-first-run
 ##
 password: ""
-## Use existing secret (ignores previous password)
+## Use an existing secret (ignores the previous password)
 # existingSecret:
-## Password key to be retrieved from Redis secret
+## Password key to be retrieved from the Redis secret
 ##
 # existingSecretPasswordKey:
 
@@ -212,7 +201,7 @@ usePasswordFile: false
 persistence: {}
   ## A manually managed Persistent Volume and Claim
   ## Requires persistence.enabled: true
-  ## If defined, PVC must be created manually before volume will be bound
+  ## If defined, PVC must be created manually before the volume will be bound
   # existingClaim:
 
 # Redis port
@@ -324,11 +313,11 @@ master:
     ## The subdirectory of the volume to mount to, useful in dev environments
     ## and one PV for multiple services.
     subPath: ""
-    ## redis data Persistent Volume Storage Class
+    ## Redis data Persistent Volume Storage Class
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
     ## If undefined (the default) or set to null, no storageClassName spec is
-    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   set, choosing the default provisioner. (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
     # storageClass: "-"
@@ -339,6 +328,8 @@ master:
     ## https://kubernetes.io/docs/concepts/storage/persistent-volumes/#selector
     matchLabels: {}
     matchExpressions: {}
+
+  ## Update strategy, can be set to RollingUpdate or onDelete by
 
   ## Update strategy, can be set to RollingUpdate or onDelete by default.
   ## https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/#updating-statefulsets
