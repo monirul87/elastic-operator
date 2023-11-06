@@ -13,7 +13,7 @@ helm repo add bitnami https://charts.bitnami.com/bitnami
 ```bash
 kubectl create ns redis
 ```
-## Data Direcotory Creation & Permission
+## Data Direcotory Creation & Permission (worker01)
 ```
 mkdir /mnt/redis-cluster-master-0
 mkdir /mnt/redis-cluster-slave-0/
