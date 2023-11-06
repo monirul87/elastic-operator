@@ -17,7 +17,7 @@ To connect to kibana you need the user name and password from elasticsearch
 1. username is default to ``elastic``
 2. Password you can get it from the secrets using the following command. 
 ```
-kubectl get secret "ride-es-elastic-user" -o go-template='{{.data.elastic | base64decode }}' -n elasticsearch
+kubectl get secret "manfaat-es-elastic-user" -o go-template='{{.data.elastic | base64decode }}' -n elasticsearch
 ```
 3. Now you can do port-forward on the service and connect to the cluster
 ```

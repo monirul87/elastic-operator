@@ -6,5 +6,5 @@ patchesJson6902:
     group: elasticsearch.k8s.elastic.co
     version: v1
     kind: Elasticsearch
-    name: ride
+    name: manfaat
   path: elasticsearch-cluster-patch.yaml
