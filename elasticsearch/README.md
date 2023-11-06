@@ -1,7 +1,7 @@
 <!--- app-name: Elasticsearch -->
 
 # Elasticsearch Helm Config
-## Clone repo and cd redis directory
+## Clone repo and cd elasticsearch directory
 ```
 git clone https://github.com/monirul87/elastic-operator.git
 cd elastic-operator/elasticsearch/
