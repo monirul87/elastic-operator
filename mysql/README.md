@@ -41,7 +41,7 @@ helm upgrade \
     mysql bitnami/mysql \
     --namespace mysql \
     --create-namespace \
-    # --version v19.13.5 \
+    --version v9.14.1 \
     -f values-prd.yaml
 ```
 
@@ -612,3 +612,45 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+```
+helm install mysql -f values-prd.yaml bitnami/mysql -n mysql
+NAME: mysql
+LAST DEPLOYED: Mon Nov  6 17:40:03 2023
+NAMESPACE: mysql
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+CHART NAME: mysql
+CHART VERSION: 9.14.1
+APP VERSION: 8.0.35
+
+** Please be patient while the chart is being deployed **
+
+Tip:
+
+  Watch the deployment status using the command: kubectl get pods -w --namespace mysql
+
+Services:
+
+  echo Primary: mysql.mysql.svc.cluster.local:3306
+
+Execute the following to get the administrator credentials:
+
+  echo Username: root
+  MYSQL_ROOT_PASSWORD=$(kubectl get secret --namespace mysql mysql -o jsonpath="{.data.mysql-root-password}" | base64 -d)
+
+To connect to your database:
+
+  1. Run a pod that you can use as a client:
+
+      kubectl run mysql-client --rm --tty -i --restart='Never' --image  docker.io/bitnami/mysql:8.0.35-debian-11-r0 --namespace mysql --env MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD --command -- bash
+
+  2. To connect to primary service (read/write):
+
+      mysql -h mysql.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
+      ```
+  ```
+  helm pull bitnami/mysql --untar --untardir temp3
+  ```
