@@ -1,4 +1,9 @@
 # Redis Helm Config
+## Clone repo and cd redis directory
+```
+git clone https://github.com/monirul87/elastic-operator.git
+cd elastic-operator/redis/
+```
 ## Add repo
 ```
 helm repo add bitnami https://charts.bitnami.com/bitnami
