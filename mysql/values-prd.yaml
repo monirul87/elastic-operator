@@ -279,7 +279,9 @@ primary:
   ## @param primary.nodeSelector Node labels for MySQL primary pods assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
-  nodeSelector: {}
+  # nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: worker01
   ## @param primary.tolerations Tolerations for MySQL primary pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
@@ -665,7 +667,9 @@ secondary:
   ## @param secondary.nodeSelector Node labels for MySQL secondary pods assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   ##
-  nodeSelector: {}
+  # nodeSelector: {}
+  nodeSelector:
+    kubernetes.io/hostname: worker01
   ## @param secondary.tolerations Tolerations for MySQL secondary pods assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
   ##
