@@ -32,6 +32,15 @@ kubectl apply -f redis-pv.yaml -n redis
 ## Redis cluster creation using helm
 ```bash
 helm install redis -f values-prd.yaml bitnami/redis -n redis
+
+or,
+helm upgrade \
+    --install \
+    redis bitnami/redis \
+    --namespace redis \
+    --create-namespace \
+    --version v18.2.0 \
+    -f values-prd.yaml
 ```
 
 ## Setup redis for logs stream
