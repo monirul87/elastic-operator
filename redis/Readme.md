@@ -9,7 +9,7 @@ cd elastic-operator/redis/
 helm repo add bitnami https://charts.bitnami.com/bitnami
 ```
 
-## Setup redis for price cache
+## Create Redis namespace
 ```bash
 kubectl create ns redis
 ```
@@ -29,7 +29,7 @@ chown -R 1001:1001 /mnt/redis-cluster-slave-2
 kubectl apply -f redis-pv.yaml -n redis
 
 ```
-## Redis cluster creation using helm
+## Redis Setup using helm
 ```bash
 helm install redis -f values-prd.yaml bitnami/redis -n redis
 
