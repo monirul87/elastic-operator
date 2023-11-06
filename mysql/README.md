@@ -36,6 +36,9 @@ kubectl apply -f mysql-pv.yaml -n mysql
 helm install mysql -f values-prd.yaml bitnami/mysql -n mysql
 
 or,
+helm install mysql  bitnami/mysql --set auth.rootPassword=root  --set architecture="replication"
+
+or,
 helm upgrade \
     --install \
     mysql bitnami/mysql \
@@ -614,9 +617,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ```
-helm install mysql -f values-prd.yaml bitnami/mysql -n mysql
+helm upgrade \
+    --install \
+    mysql bitnami/mysql \
+    --namespace mysql \
+    --create-namespace \
+    --version v9.14.1 \
+    -f values-prd.yaml
+Release "mysql" does not exist. Installing it now.
 NAME: mysql
-LAST DEPLOYED: Mon Nov  6 17:40:03 2023
+LAST DEPLOYED: Mon Nov  6 18:27:16 2023
 NAMESPACE: mysql
 STATUS: deployed
 REVISION: 1
@@ -634,7 +644,8 @@ Tip:
 
 Services:
 
-  echo Primary: mysql.mysql.svc.cluster.local:3306
+  echo Primary: mysql-primary.mysql.svc.cluster.local:3306
+  echo Secondary: mysql-secondary.mysql.svc.cluster.local:3306
 
 Execute the following to get the administrator credentials:
 
@@ -649,8 +660,12 @@ To connect to your database:
 
   2. To connect to primary service (read/write):
 
-      mysql -h mysql.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
-      ```
+      mysql -h mysql-primary.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
+
+  3. To connect to secondary service (read-only):
+
+      mysql -h mysql-secondary.mysql.svc.cluster.local -uroot -p"$MYSQL_ROOT_PASSWORD"
+  ```
   ```
   helm pull bitnami/mysql --untar --untardir temp3
   ```
