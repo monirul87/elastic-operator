@@ -1071,9 +1071,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 ```
-helm install redis bitnami/redis -n redis
-helm install redis -f redis-values.yaml bitnami/redis -n redis
-helm install redis -f redis-values.yaml stable/redis -n redis
+helm pull bitnami/redis --untar --untardir temp
+helm install redis temp/redis -f temp/redis/values.yaml
+chown -R 1001:1001 /mnt/redis-cluster-master-0
+chown -R 1001:1001 /mnt/redis-cluster-slave-0/
+chown -R 1001:1001 /mnt/redis-cluster-slave-1
+chown -R 1001:1001 /mnt/redis-cluster-slave-2
+
+logLevel debug
 ```
 ```
 $ # helm upgrade \
