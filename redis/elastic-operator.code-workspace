@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "elastic-operator",
+			"path": "../../AirAsia-Repo/monirul_scripts/p1/elastic-stack/elastic-operator/elastic-operator"
+		},
+		{
+			"name": "redis",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
