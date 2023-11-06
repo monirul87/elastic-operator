@@ -18,7 +18,7 @@ chown -R 1001:1001 /mnt/redis-cluster-slave-2
 
 ## PV Creation
 ```
-kubectl apply -f redis-pv.yaml
+kubectl apply -f redis-pv.yaml -n redis
 
 ```
 ```bash
