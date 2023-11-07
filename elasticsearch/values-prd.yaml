@@ -848,7 +848,7 @@ data:
   # - name: "ES_JAVA_OPTS"
   # value: "-Xms2g -Xmx2g"
   # heapSize: 4024m
-  heapSize: 4Gi
+  heapSize: 128m
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param data.podSecurityContext.enabled Enabled data pods' Security Context
