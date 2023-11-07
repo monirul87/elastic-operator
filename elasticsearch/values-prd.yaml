@@ -525,9 +525,9 @@ master:
   ## Example:
   ##   heapSize: 128m
   ##
-    env:
-    - name: "ES_JAVA_OPTS"
-    value: "-Xms2g -Xmx2g"
+    # env:
+    # - name: "ES_JAVA_OPTS"
+    # value: "-Xms2g -Xmx2g"
   heapSize: "2Gi"
   # heapSize: 128m
   ## Configure Pods Security Context
@@ -844,9 +844,9 @@ data:
   ##   heapSize: 128m
   ##
   # heapSize: 1024m
-  env:
-  - name: "ES_JAVA_OPTS"
-  value: "-Xms2g -Xmx2g"
+  # env:
+  # - name: "ES_JAVA_OPTS"
+  # value: "-Xms2g -Xmx2g"
   # heapSize: 4024m
   heapSize: 4Gi
   ## Configure Pods Security Context
