@@ -709,14 +709,14 @@ replica:
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
     # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits: {}
-    limits:
-      cpu: 1
-      memory: 1Gi
-    # requests: {}
-    requests: 
-      cpu: 1
-      memory: 1Gi
+    limits: {}
+    # limits:
+    #   cpu: 1
+    #   memory: 1Gi
+    requests: {}
+    # requests: 
+    #   cpu: 1
+    #   memory: 1Gi
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param replica.podSecurityContext.enabled Enabled Redis&reg; replicas pods' Security Context
