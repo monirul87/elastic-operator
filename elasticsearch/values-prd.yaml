@@ -511,13 +511,13 @@ master:
   resources:
     ## Example:
     limits:
-       cpu: 2
-       memory: "4Gi"
+       cpu: 1
+       memory: "2Gi"
     # limits: {}
     ## Examples:
     requests:
-       cpu: 2
-       memory: "4Gi"
+       cpu: 1
+       memory: "2Gi"
     # requests: {}
   ## @param master.heapSize Elasticsearch master-eligible node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
@@ -529,7 +529,7 @@ master:
     # - name: "ES_JAVA_OPTS"
     # value: "-Xms2g -Xmx2g"
   # heapSize: "2Gi"
-  heapSize: 128m
+  heapSize: 1024m
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param master.podSecurityContext.enabled Enabled master-elegible pods' Security Context
@@ -833,6 +833,7 @@ data:
   ##
   resources:
     limits:
+      cpu: 2
       memory: "4Gi"
     requests:
       cpu: 2
@@ -848,7 +849,7 @@ data:
   # - name: "ES_JAVA_OPTS"
   # value: "-Xms2g -Xmx2g"
   # heapSize: 4024m
-  heapSize: 128m
+  heapSize: 2048m
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param data.podSecurityContext.enabled Enabled data pods' Security Context
@@ -1153,10 +1154,10 @@ coordinating:
   ##
   resources:
     limits: 
-      cpu: 2
+      cpu: 1
       memory: "2Gi"
     requests:
-      cpu: 2
+      cpu: 1
       memory: "2Gi"
   ## @param coordinating.heapSize Elasticsearch coordinating node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
@@ -1164,7 +1165,7 @@ coordinating:
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+  heapSize: 1024m
   # heapSize: "1Gi"
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
@@ -1450,7 +1451,8 @@ ingest:
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+  heapSize: 1024m
+  # heapSize: 128m
   # heapSize: 2Gi
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
@@ -1972,12 +1974,12 @@ metrics:
   resources:
     ## Example:
     limits:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # limits: {}
     ## Examples:
     requests:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # requests: {}
   ## Elasticsearch metrics container's liveness probe
@@ -2221,12 +2223,12 @@ volumePermissions:
   resources:
     ## Example:
     limits:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # limits: {}
     ## Examples:
     requests:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # requests: {}
 
@@ -2272,12 +2274,12 @@ sysctlImage:
   resources:
     ## Example:
     limits:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # limits: {}
     ## Examples:
     requests:
-       cpu: 2
+       cpu: 1
        memory: 2Gi
     # requests: {}
 
