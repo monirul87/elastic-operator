@@ -528,8 +528,8 @@ master:
     # env:
     # - name: "ES_JAVA_OPTS"
     # value: "-Xms2g -Xmx2g"
-  heapSize: "2Gi"
-  # heapSize: 128m
+  # heapSize: "2Gi"
+  heapSize: 128m
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param master.podSecurityContext.enabled Enabled master-elegible pods' Security Context
@@ -1450,8 +1450,8 @@ ingest:
   ## Example:
   ##   heapSize: 128m
   ##
-  # heapSize: 128m
-  heapSize: 2Gi
+  heapSize: 128m
+  # heapSize: 2Gi
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param ingest.podSecurityContext.enabled Enabled ingest-only pods' Security Context
