@@ -25,6 +25,7 @@ mkdir /mnt/es-ingest-0
 mkdir /mnt/es-ingest-1
 mkdir /mnt/es-master-0
 mkdir /mnt/es-master-1
+mkdir /mnt/es-master-2
 
 chown -R 1001:1001 /mnt/es-coordinating-0
 chown -R 1001:1001 /mnt/es-coordinating-1/
@@ -34,6 +35,7 @@ chown -R 1001:1001 /mnt/es-ingest-0/
 chown -R 1001:1001 /mnt/es-ingest-1/
 chown -R 1001:1001 /mnt/es-master-0
 chown -R 1001:1001 /mnt/es-master-1/
+chown -R 1001:1001 /mnt/es-master-2/
 ```
 ## PV Creation
 ```

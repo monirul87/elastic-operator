@@ -465,7 +465,7 @@ master:
   masterOnly: true
   ## @param master.replicaCount Number of master-elegible replicas to deploy
   ##
-  replicaCount: 2
+  replicaCount: 3
 
   ## @param master.extraRoles Append extra roles to the node role
   ##
@@ -510,22 +510,26 @@ master:
   ##
   resources:
     ## Example:
-    ## limits:
-    ##    cpu: 500m
-    ##    memory: 1Gi
-    limits: {}
+    limits:
+       cpu: 2
+       memory: "4Gi"
+    # limits: {}
     ## Examples:
-    ## requests:
-    ##    cpu: 250m
-    ##    memory: 256Mi
-    requests: {}
+    requests:
+       cpu: 2
+       memory: "4Gi"
+    # requests: {}
   ## @param master.heapSize Elasticsearch master-eligible node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
   ## If omitted, it will be automatically set.
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+    env:
+    - name: "ES_JAVA_OPTS"
+    value: "-Xms2g -Xmx2g"
+  heapSize: "2Gi"
+  # heapSize: 128m
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param master.podSecurityContext.enabled Enabled master-elegible pods' Security Context
@@ -828,17 +832,23 @@ data:
   ## @param data.resources.requests [object] The requested resources for the data containers
   ##
   resources:
-    limits: {}
+    limits:
+      memory: "4Gi"
     requests:
-      cpu: 25m
-      memory: 2048Mi
+      cpu: 2
+      memory: "4Gi"
   ## @param data.heapSize Elasticsearch data node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
   ## If omitted, it will be automatically set.
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 1024m
+  # heapSize: 1024m
+  env:
+  - name: "ES_JAVA_OPTS"
+  value: "-Xms2g -Xmx2g"
+  # heapSize: 4024m
+  heapSize: 4Gi
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param data.podSecurityContext.enabled Enabled data pods' Security Context
@@ -1142,17 +1152,20 @@ coordinating:
   ## @param coordinating.resources.requests [object] The requested resources for the coordinating-only containers
   ##
   resources:
-    limits: {}
+    limits: 
+      cpu: 2
+      memory: "2Gi"
     requests:
-      cpu: 25m
-      memory: 256Mi
+      cpu: 2
+      memory: "2Gi"
   ## @param coordinating.heapSize Elasticsearch coordinating node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
   ## If omitted, it will be automatically set.
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+  # heapSize: 128m
+  heapSize: "1Gi"
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param coordinating.podSecurityContext.enabled Enabled coordinating-only pods' Security Context
@@ -1425,17 +1438,20 @@ ingest:
   ## @param ingest.resources.requests [object] The requested resources for the ingest-only containers
   ##
   resources:
-    limits: {}
+    limits:
+      cpu: 1
+      memory: 2Gi
     requests:
-      cpu: 25m
-      memory: 256Mi
+      cpu: 1
+      memory: 2Gi
   ## @param ingest.heapSize Elasticsearch ingest-only node heap size.
   ## Note: The recommended heapSize is half of the container's memory.
   ## If omitted, it will be automatically set.
   ## Example:
   ##   heapSize: 128m
   ##
-  heapSize: 128m
+  # heapSize: 128m
+  heapSize: 2Gi
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param ingest.podSecurityContext.enabled Enabled ingest-only pods' Security Context
@@ -1955,15 +1971,15 @@ metrics:
   ##
   resources:
     ## Example:
-    ## limits:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    limits: {}
+    limits:
+       cpu: 2
+       memory: 2Gi
+    # limits: {}
     ## Examples:
-    ## requests:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    requests: {}
+    requests:
+       cpu: 2
+       memory: 2Gi
+    # requests: {}
   ## Elasticsearch metrics container's liveness probe
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
   ## @param metrics.livenessProbe.enabled Enable/disable the liveness probe (metrics pod)
@@ -2204,15 +2220,15 @@ volumePermissions:
   ##
   resources:
     ## Example:
-    ## limits:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    limits: {}
+    limits:
+       cpu: 2
+       memory: 2Gi
+    # limits: {}
     ## Examples:
-    ## requests:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    requests: {}
+    requests:
+       cpu: 2
+       memory: 2Gi
+    # requests: {}
 
 ## Kernel settings modifier image
 ##
@@ -2255,15 +2271,15 @@ sysctlImage:
   ##
   resources:
     ## Example:
-    ## limits:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    limits: {}
+    limits:
+       cpu: 2
+       memory: 2Gi
+    # limits: {}
     ## Examples:
-    ## requests:
-    ##    cpu: 100m
-    ##    memory: 128Mi
-    requests: {}
+    requests:
+       cpu: 2
+       memory: 2Gi
+    # requests: {}
 
 ## @section Kibana Parameters
 
