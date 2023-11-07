@@ -19,10 +19,12 @@ mkdir /mnt/redis-cluster-master-0
 mkdir /mnt/redis-cluster-slave-0/
 mkdir /mnt/redis-cluster-slave-1/
 mkdir /mnt/redis-cluster-slave-2/
+mkdir /mnt/redis-cluster-slave-3/
 chown -R 1001:1001 /mnt/redis-cluster-master-0
 chown -R 1001:1001 /mnt/redis-cluster-slave-0/
 chown -R 1001:1001 /mnt/redis-cluster-slave-1
 chown -R 1001:1001 /mnt/redis-cluster-slave-2
+chown -R 1001:1001 /mnt/redis-cluster-slave-3
 ```
 ## PV Creation
 ```
