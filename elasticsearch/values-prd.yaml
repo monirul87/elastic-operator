@@ -1164,8 +1164,8 @@ coordinating:
   ## Example:
   ##   heapSize: 128m
   ##
-  # heapSize: 128m
-  heapSize: "1Gi"
+  heapSize: 128m
+  # heapSize: "1Gi"
   ## Configure Pods Security Context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
   ## @param coordinating.podSecurityContext.enabled Enabled coordinating-only pods' Security Context
